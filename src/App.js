@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import MemeList from "./components/MemeList";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
+import CategoryFilter from "./components/CategoryFilter";
+import MemeGrid from "./components/MemeGrid";
 
 function App() {
   const queryClient = new QueryClient();
@@ -12,6 +14,10 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <Navbar user={user} setUser={setUser}></Navbar>
+        <div className="max-w-6xl p-4 mx-auto grid grid-cols-[300px_1fr] gap-8">
+          <CategoryFilter></CategoryFilter>
+          <MemeGrid></MemeGrid>
+        </div>
 
         {/* <div className="bg-gray-100">
           <div className="px-8 py-12 max-w-md mx-auto sm:max-w-xl">
