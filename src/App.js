@@ -14,9 +14,10 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <Navbar user={user} setUser={setUser}></Navbar>
-        <div className="max-w-6xl p-4 mx-auto grid grid-cols-[300px_1fr] gap-8">
+        <div className='max-w-6xl p-6 mx-auto grid grid-cols-[300px_1fr] gap-8'>
           <CategoryFilter></CategoryFilter>
           <MemeGrid></MemeGrid>
+          <FileUpload></FileUpload>
         </div>
 
         {/* <div className="bg-gray-100">
@@ -45,8 +46,8 @@ function App() {
             </a>
           </div>
         </div> */}
-        {/* <FileUpload></FileUpload>
-        <MemeList></MemeList> */}
+
+        {/* <MemeList></MemeList> */}
       </QueryClientProvider>
     </div>
   );
