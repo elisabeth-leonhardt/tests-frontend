@@ -28,6 +28,7 @@ async function uploadMemes(uploadObject) {
 
 function FileUpload({ user }) {
   const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
   const [formState, setFormState] = useState({
     memeTitle: "",
     tag: "frontend",
@@ -43,6 +44,9 @@ function FileUpload({ user }) {
 
   function onFileChange(event) {
     setSelectedFile(event.target.files[0]);
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    setPreview(reader);
   }
 
   function onFormChange(event) {
@@ -70,10 +74,19 @@ function FileUpload({ user }) {
     // resetear el formulario
     event.target[0].value = null; // resets the file
     setFormState({ memeTitle: "", tag: "" });
+    setSelectedFile(null);
+    setPreview(null);
   }
 
   return (
     <div>
+      {selectedFile && (
+        <img
+          src={preview.result}
+          alt='newly uploaded meme'
+          className='max-h-[15rem]'
+        />
+      )}
       <form
         onSubmit={onFormSubmit}
         className='grid items-center gap-4 grid-cols-4 '

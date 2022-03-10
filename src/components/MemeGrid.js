@@ -51,7 +51,11 @@ export function MemeCard({ meme }) {
         por {meme.username}
       </p>
 
-      <img src={meme.image} alt={meme.title} />
+      <img
+        src={meme.image}
+        alt={meme.title}
+        className='p-2 mx-auto max-h-[25rem]'
+      />
       <span className='flex gap-2 justify-between items-center p-2'>
         <span className='bg-gray-400 px-2 py-1 rounded-2xl'>{meme.tag}</span>
         <button onClick={handleLike} className='flex gap-2'>
@@ -93,10 +97,15 @@ function MemeGrid({ filterContent }) {
       keepPreviousData: true,
     }
   );
+
+  let reversed;
+  if (data) {
+    reversed = [...data].reverse();
+  }
   return (
-    <div className='grid grid-cols-2 gap-8'>
-      {data &&
-        data.map((meme) => <MemeCard meme={meme} key={meme.id}></MemeCard>)}
+    <div className='grid grid-cols-1 gap-8'>
+      {reversed &&
+        reversed.map((meme) => <MemeCard meme={meme} key={meme.id}></MemeCard>)}
     </div>
   );
 }

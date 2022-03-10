@@ -60,8 +60,6 @@ function MemeAdminCard({ meme }) {
     setModalState(false);
   }
 
-  const handleModalClose = () => setModalState(false);
-
   return (
     <div className='shadow-md shadow-dark-background rounded relative p-4 flex gap-4'>
       <img src={meme.image} alt={meme.title} className='max-h-[15rem]' />
@@ -151,6 +149,7 @@ function MemeAdminCard({ meme }) {
                   onSubmit={onFormSubmit}
                   className='grid items-center gap-4 grid-cols-1 p-4 w-[50vw]'
                 >
+                  <img src={meme.image} alt={meme.title} className='max-h-60' />
                   <label htmlFor='memeTitle' className='flex items-center'>
                     Título:
                     <input
@@ -222,6 +221,12 @@ function MemeAdmin({ user }) {
       keepPreviousData: true,
     }
   );
+
+  let reversed;
+  if (data) {
+    reversed = [...data].reverse();
+  }
+
   return (
     <div className='max-w-6xl p-4 mx-auto'>
       <h1 className='text-2xl'>Bienvenidos {user}!</h1>
@@ -233,7 +238,7 @@ function MemeAdmin({ user }) {
       <div className='shadow-md shadow-dark-background p-4 rounded'>
         <h2 className='text-xl text-bitlogic-blue'>Administrá tus memes:</h2>
         <div className='grid grid-cols-1 gap-6'>
-          {data?.map((meme) => (
+          {reversed?.map((meme) => (
             <MemeAdminCard meme={meme}></MemeAdminCard>
           ))}
         </div>
