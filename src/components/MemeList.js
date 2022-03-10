@@ -11,7 +11,6 @@ function MemeList(props) {
   const { data } = useQuery("getMemes", fetchMemes, {
     keepPreviousData: true,
   });
-  console.log(data);
   return <div>hola memes!</div>;
 }
 

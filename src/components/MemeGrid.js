@@ -18,19 +18,20 @@ async function updateMemeLikes(memeObject) {
   }).then((response) => response.json());
 }
 
-function MemeCard({ meme }) {
+export function MemeCard({ meme }) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(updateMemeLikes, {
     onSuccess: () => {
       queryClient.invalidateQueries("getMemes");
+      queryClient.invalidateQueries("getUserMemes");
     },
   });
 
   function handleLike() {
     const newMemeObject = { ...meme, likes: meme.likes + 1 };
-    console.log(newMemeObject);
     mutate(newMemeObject);
   }
+
   // TODO: renegar con las fechas
   const random = Math.floor(Math.random() * 100);
   const daysAgo = differenceInDays(new Date(), new Date(meme.date));
@@ -76,10 +77,22 @@ function MemeCard({ meme }) {
   );
 }
 
-function MemeGrid(props) {
-  const { data } = useQuery("getMemes", fetchMemes, {
-    keepPreviousData: true,
-  });
+function MemeGrid({ filterContent }) {
+  const { data } = useQuery(
+    ["getMemes", filterContent],
+    async () => {
+      let queryParam = "";
+      if (filterContent.length !== 0) {
+        queryParam = `?tag=${filterContent}`;
+      }
+      return await fetch(`http://localhost:8000/memes${queryParam}`).then(
+        (response) => response.json()
+      );
+    },
+    {
+      keepPreviousData: true,
+    }
+  );
   return (
     <div className='grid grid-cols-2 gap-8'>
       {data &&

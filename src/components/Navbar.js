@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar({ user, setUser }) {
+  const [modalState, setModalState] = useState(false);
+  const [userInput, setUserInput] = useState(user);
+
+  function handleModalClose() {
+    setUser(userInput);
+    setModalState(false);
+  }
   return (
     <nav className='bg-dark-background'>
       <div className='max-w-6xl p-4 mx-auto text-white flex justify-between items-center border-1 border-rose-500'>
         <img src='BITMEMES.png' alt='bitlogic logo' className='w-40' />
         <div className='flex gap-6'>
-          <a href='/' className='flex gap-2 hover:text-bitlogic-blue'>
+          <Link to='/' className='flex gap-2 hover:text-bitlogic-blue'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6'
@@ -22,10 +30,10 @@ function Navbar({ user, setUser }) {
               />
             </svg>
             Home
-          </a>
+          </Link>
           {user.length > 0 && (
-            <a
-              href={`/usermemes?username=${user}`}
+            <Link
+              to={`/mis-memes`}
               className='flex gap-2 hover:text-bitlogic-blue'
             >
               <svg
@@ -43,15 +51,68 @@ function Navbar({ user, setUser }) {
                 />
               </svg>
               Mis Memes
-            </a>
+            </Link>
           )}
         </div>
         {user.length > 0 ? (
-          <button className='text-bitlogic-yellow'>{user}</button>
+          <button
+            className='text-bitlogic-yellow'
+            onClick={() => setModalState(true)}
+          >
+            {user}
+          </button>
         ) : (
-          <butto>Login</butto>
+          <button onClick={() => setModalState(true)}>Login</button>
         )}
       </div>
+      {modalState && (
+        <>
+          <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+            <div className='relative w-auto my-6 mx-auto max-w-3xl'>
+              {/*content*/}
+              <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
+                {/*header*/}
+                <div className='flex items-start justify-between p-3 border-b border-solid border-blueGray-200 rounded-t'>
+                  <h3 className='text-2xl'>Cambiar usuario:</h3>
+                </div>
+                {/*body*/}
+                <div className='relative p-6 flex-auto'>
+                  <label htmlFor='name'>
+                    {" "}
+                    Nombre de usuario:
+                    <input
+                      type='text'
+                      id='name'
+                      name='name'
+                      className='border-[1px] ml-4'
+                      value={userInput}
+                      onChange={(e) => setUserInput(e.target.value)}
+                    />
+                  </label>
+                </div>
+                {/*footer*/}
+                <div className='flex items-center justify-end p-3 border-t border-solid border-blueGray-200 rounded-b'>
+                  <button
+                    className='text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                    type='button'
+                    onClick={() => setModalState(false)}
+                  >
+                    Cerrar
+                  </button>
+                  <button
+                    className='bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                    type='button'
+                    onClick={handleModalClose}
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='opacity-50 fixed inset-0 z-40 bg-black'></div>
+        </>
+      )}
     </nav>
   );
 }

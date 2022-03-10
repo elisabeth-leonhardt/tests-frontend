@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { uid } from "uid";
 import { useMutation, useQueryClient } from "react-query";
+import { filters } from "./filters";
 
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -25,14 +26,16 @@ async function uploadMemes(uploadObject) {
   }).then((response) => response.json());
 }
 
-function FileUpload(props) {
+function FileUpload({ user }) {
   const [selectedFile, setSelectedFile] = useState();
-  const [formState, setFormState] = useState({ memeTitle: "", tag: "" });
+  const [formState, setFormState] = useState({
+    memeTitle: "",
+    tag: "frontend",
+  });
 
   const { mutate } = useMutation(uploadMemes, {
     onSuccess: () => {
-      console.log("success!");
-      queryClient.invalidateQueries("getMemes");
+      queryClient.refetchQueries("getUserMemes");
     },
   });
 
@@ -60,11 +63,10 @@ function FileUpload(props) {
       image: base64Image,
       id: uid(),
       likes: 0,
-      username: "funny-eli",
+      username: user,
     };
     mutate(newMeme);
     // enviar el objeto a la base de datos
-    console.log(selectedFile, formState);
     // resetear el formulario
     event.target[0].value = null; // resets the file
     setFormState({ memeTitle: "", tag: "" });
@@ -72,29 +74,51 @@ function FileUpload(props) {
 
   return (
     <div>
-      <form onSubmit={onFormSubmit}>
-        <input type="file" name="file" onChange={onFileChange} />
-        <label htmlFor="memeTitle">
+      <form
+        onSubmit={onFormSubmit}
+        className='grid items-center gap-4 grid-cols-4 '
+      >
+        <input
+          type='file'
+          name='file'
+          onChange={onFileChange}
+          className='border-[1px] border-bitlogic-blue h-10 p-1 rounded'
+        />
+        <label htmlFor='memeTitle' className='flex items-center'>
           Título:
           <input
-            type="text"
-            id="memeTitle"
-            name="memeTitle"
+            type='text'
+            id='memeTitle'
+            name='memeTitle'
+            className='border-[1px] mx-2 p-1 h-10 border-bitlogic-blue rounded w-full'
+            placeholder='el mejor meme'
             onChange={onFormChange}
             value={formState.memeTitle}
           />
         </label>
-        <label htmlFor="memeTitle">
+        <label htmlFor='memeTitle' className='flex items-center'>
           Tag:
-          <input
-            type="text"
-            id="tag"
-            name="tag"
+          <select
+            id='tag'
+            name='tag'
             onChange={onFormChange}
             value={formState.tag}
-          />
+            className='mx-2 p-2 border-[1px] h-10 border-bitlogic-blue bg-white rounded w-full'
+          >
+            {filters.map((filter) => (
+              <option value={filter} p-2>
+                {filter}
+              </option>
+            ))}
+          </select>
         </label>
-        <button type="submit">Subir Meme</button>
+        <button
+          type='submit'
+          className='bg-bitlogic-blue px-4 py-2 rounded text-white disabled:bg-gray-500'
+          disabled={!selectedFile}
+        >
+          Subir Meme
+        </button>
       </form>
     </div>
   );
