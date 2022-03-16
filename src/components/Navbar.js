@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar({ user, setUser }) {
   const [modalState, setModalState] = useState(false);
   const [userInput, setUserInput] = useState(user);
+  const navigate = useNavigate();
 
   function handleModalClose() {
     setUser(userInput);
     setModalState(false);
+    if (userInput.length > 0) {
+      navigate("/mis-memes");
+    }
   }
   return (
     <nav className='bg-dark-background'>

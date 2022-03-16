@@ -1,6 +1,5 @@
 import React from "react";
 import CategoryFilter from "./CategoryFilter";
-import FileUpload from "./FileUpload";
 import MemeGrid from "./MemeGrid";
 
 function HomeComponent({ filterContent, setFilterContent }) {

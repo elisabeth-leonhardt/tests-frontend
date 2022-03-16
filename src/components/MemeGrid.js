@@ -2,12 +2,6 @@ import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import differenceInDays from "date-fns/differenceInDays";
 
-async function fetchMemes() {
-  return await fetch("http://localhost:8000/memes").then((response) =>
-    response.json()
-  );
-}
-
 async function updateMemeLikes(memeObject) {
   await fetch(`http://localhost:8000/memes/${memeObject.id}`, {
     method: "PUT",
@@ -22,8 +16,7 @@ export function MemeCard({ meme }) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(updateMemeLikes, {
     onSuccess: () => {
-      queryClient.invalidateQueries("getMemes");
-      queryClient.invalidateQueries("getUserMemes");
+      queryClient.refetchQueries("getMemes");
     },
   });
 
