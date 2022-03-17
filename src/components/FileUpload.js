@@ -119,7 +119,7 @@ function FileUpload({ user }) {
             className='mx-2 p-2 border-[1px] h-10 border-bitlogic-blue bg-white rounded w-full'
           >
             {filters.map((filter) => (
-              <option value={filter} p-2>
+              <option value={filter} key={filter}>
                 {filter}
               </option>
             ))}

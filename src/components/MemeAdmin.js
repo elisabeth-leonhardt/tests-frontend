@@ -172,7 +172,7 @@ function MemeAdminCard({ meme }) {
                       className='mx-2 p-2 border-[1px] h-10 border-bitlogic-blue bg-white rounded w-full'
                     >
                       {filters.map((filter) => (
-                        <option value={filter} p-2>
+                        <option value={filter} key={filter}>
                           {filter}
                         </option>
                       ))}
@@ -239,7 +239,7 @@ function MemeAdmin({ user }) {
         <h2 className='text-xl text-bitlogic-blue'>Administrá tus memes:</h2>
         <div className='grid grid-cols-1 gap-6'>
           {reversed?.map((meme) => (
-            <MemeAdminCard meme={meme}></MemeAdminCard>
+            <MemeAdminCard meme={meme} key={meme.id}></MemeAdminCard>
           ))}
         </div>
       </div>
