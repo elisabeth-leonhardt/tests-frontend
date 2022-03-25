@@ -24,16 +24,6 @@ describe("validar convertUserObjectToString", () => {
   it("concatenar un nombre totalmente vacio no retorna undefined", () => {
     expect(helperFunctions.convertUserObjectToString({})).not.toBeUndefined();
   });
-
-  it("testear y adelantar un timer", async () => {
-    jest.useFakeTimers();
-    jest.spyOn(global, "setTimeout");
-
-    helperFunctions.getRelatedArticles(123);
-    jest.runAllTimers();
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
-  });
 });
 
 // 1.5 la funcion avg funciona correctamente
