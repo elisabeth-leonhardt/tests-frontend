@@ -12,11 +12,11 @@ async function updateMemeLikes(memeObject) {
   }).then((response) => response.json());
 }
 
-export function MemeCard({ meme }) {
+export function MemeCard({ meme, filterContent }) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(updateMemeLikes, {
-    onSuccess: () => {
-      queryClient.refetchQueries("getMemes");
+    onSuccess: async () => {
+      queryClient.invalidateQueries("getMemes");
     },
   });
 
@@ -75,21 +75,15 @@ export function MemeCard({ meme }) {
 }
 
 function MemeGrid({ filterContent }) {
-  const { data } = useQuery(
-    ["getMemes", filterContent],
-    async () => {
-      let queryParam = "";
-      if (filterContent.length !== 0) {
-        queryParam = `?tag=${filterContent}`;
-      }
-      return await fetch(`http://localhost:8000/memes${queryParam}`).then(
-        (response) => response.json()
-      );
-    },
-    {
-      keepPreviousData: true,
+  const { data } = useQuery(["getMemes", filterContent], async () => {
+    let queryParam = "";
+    if (filterContent.length !== 0) {
+      queryParam = `?tag=${filterContent}`;
     }
-  );
+    return await fetch(`http://localhost:8000/memes${queryParam}`).then(
+      (response) => response.json()
+    );
+  });
 
   let reversed;
   if (data) {
@@ -98,7 +92,13 @@ function MemeGrid({ filterContent }) {
   return (
     <div className='grid grid-cols-1 gap-8'>
       {reversed &&
-        reversed.map((meme) => <MemeCard meme={meme} key={meme.id}></MemeCard>)}
+        reversed.map((meme) => (
+          <MemeCard
+            meme={meme}
+            key={meme.id}
+            filterContent={filterContent}
+          ></MemeCard>
+        ))}
     </div>
   );
 }

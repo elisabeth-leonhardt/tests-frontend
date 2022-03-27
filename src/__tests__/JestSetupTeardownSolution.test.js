@@ -15,7 +15,7 @@ beforeEach(() => {
   ];
 });
 
-test("sobreescribir algo en la db", () => {
+test.only("sobreescribir algo en la db", () => {
   // sobreescribir los lenguajes de un dev:
   db[0].languages = [];
   // ejecutar algún test con la db modificada

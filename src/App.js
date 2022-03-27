@@ -1,5 +1,6 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
 import {
@@ -13,8 +14,9 @@ import HomeComponent from "./components/Home";
 import MemeAdmin from "./components/MemeAdmin";
 import { useCookies, CookiesProvider } from "react-cookie";
 
+const queryClient = new QueryClient();
+
 function App() {
-  const queryClient = new QueryClient();
   const [filterContent, setFilterContent] = useState("");
   const [cookies, setCookie] = useCookies();
   const [user, setUser] = useState(cookies["bitmemes-user"] || "");
@@ -27,6 +29,7 @@ function App() {
       <CookiesProvider>
         <BrowserRouter>
           <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
             <Navbar user={user} setUser={setUser}></Navbar>
             <Routes>
               <Route

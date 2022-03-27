@@ -32,6 +32,7 @@ test("testear y adelantar un timer", async () => {
   helperFunctions.getRelatedArticles(123);
   jest.runAllTimers();
   expect(setTimeout).toHaveBeenCalledTimes(1);
+  console.log("test terminado");
   expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
 });
 

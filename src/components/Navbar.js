@@ -14,8 +14,8 @@ function Navbar({ user, setUser }) {
     }
   }
   return (
-    <nav className='bg-dark-background'>
-      <div className='max-w-6xl p-4 mx-auto text-white flex justify-between items-center border-1 border-rose-500'>
+    <aside className='bg-dark-background'>
+      <div className='max-w-6xl p-2 mx-auto text-white flex justify-between items-center border-1 border-rose-500'>
         <img src='BITMEMES.png' alt='bitlogic logo' className='w-40' />
         <div className='flex gap-6'>
           <Link to='/' className='flex gap-2 hover:text-bitlogic-blue'>
@@ -117,7 +117,7 @@ function Navbar({ user, setUser }) {
           <div className='opacity-50 fixed inset-0 z-40 bg-black'></div>
         </>
       )}
-    </nav>
+    </aside>
   );
 }
 
