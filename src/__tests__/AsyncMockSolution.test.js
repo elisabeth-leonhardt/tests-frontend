@@ -15,6 +15,7 @@ test("obtener un chiste aleatorio", async () => {
 
 // 2. mockear la función del chiste
 test("obtener un chiste mockeado", async () => {
+  // la implementacion de un mock con jest.fn() hay que restaurar a mano para no afectar los otros tests!
   const original = helperFunctions.getRandomDadJoke;
   helperFunctions.getRandomDadJoke = jest.fn().mockImplementation(() =>
     Promise.resolve({
@@ -30,6 +31,7 @@ test("obtener un chiste mockeado", async () => {
   );
   expect(helperFunctions.getRandomDadJoke).toHaveBeenCalledTimes(1);
   expect(helperFunctions.getRandomDadJoke).toHaveBeenCalledWith();
+  // restauracion de la implementacion original
   helperFunctions.getRandomDadJoke = original;
 });
 

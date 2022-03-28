@@ -15,7 +15,10 @@ async function updateMemeLikes(memeObject) {
 export function MemeCard({ meme, handleLike }) {
   const daysAgo = differenceInDays(new Date(), new Date(meme.date));
   return (
-    <div className='shadow-md shadow-dark-background rounded relative'>
+    <div
+      className='shadow-md shadow-dark-background rounded relative'
+      data-testid='meme-card'
+    >
       {daysAgo === 0 && (
         <span className='absolute right-[-2ch] top-[-2ch] bg-red-600 w-[6ch] h-[6ch] rounded-full leading-[6ch] text-sm text-center'>
           nuevo!
@@ -87,7 +90,11 @@ function MemeGrid({ filterContent }) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(updateMemeLikes, {
     onSuccess: async () => {
+      console.log("refetching");
       queryClient.invalidateQueries("getMemes");
+    },
+    onError: async () => {
+      console.log("error");
     },
   });
 

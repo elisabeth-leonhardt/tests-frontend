@@ -32,7 +32,6 @@ describe("val", () => {
   let val;
   describe("1", () => {
     val = "1";
-    //skipped porque va a fallar
     it.skip("should be 1", () => {
       expect(val).toBe("1");
     });
