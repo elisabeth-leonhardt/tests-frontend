@@ -24,7 +24,6 @@ describe("validar el componente navbar", () => {
         ></Navbar>
       </BrowserRouter>
     );
-    screen.debug();
     expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("funny-eli")).toBeInTheDocument();
     expect(screen.queryByText("Login")).not.toBeInTheDocument();
@@ -32,13 +31,9 @@ describe("validar el componente navbar", () => {
   it("renderiza correctamente con usuario", () => {
     render(
       <BrowserRouter>
-        <Navbar
-          user='funny-eli'
-          //   setUser={() => console.log("setting user")}
-        ></Navbar>
+        <Navbar user='funny-eli'></Navbar>
       </BrowserRouter>
     );
-    screen.debug();
     expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("funny-eli")).toBeInTheDocument();
     expect(screen.queryByText("Login")).not.toBeInTheDocument();

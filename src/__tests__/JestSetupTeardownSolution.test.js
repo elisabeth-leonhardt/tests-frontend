@@ -15,7 +15,7 @@ beforeEach(() => {
   ];
 });
 
-test.only("sobreescribir algo en la db", () => {
+test("sobreescribir algo en la db", () => {
   // sobreescribir los lenguajes de un dev:
   db[0].languages = [];
   // ejecutar algún test con la db modificada
@@ -28,12 +28,12 @@ test("db restaurada", () => {
 
 // https://stackoverflow.com/questions/56240783/jest-understanding-execution-order-of-a-describe-and-it
 
-describe.skip("val", () => {
+describe("val", () => {
   let val;
-
   describe("1", () => {
     val = "1";
-    it("should be 1", () => {
+    //skipped porque va a fallar
+    it.skip("should be 1", () => {
       expect(val).toBe("1");
     });
   });

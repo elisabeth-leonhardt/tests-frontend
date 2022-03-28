@@ -3,6 +3,10 @@ import { helperFunctions } from "../utils/helperFunctions";
 
 jest.mock("uid");
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 // 1. async-await: validar que el chiste llega correctamente
 test("obtener un chiste aleatorio", async () => {
   const joke = await helperFunctions.getRandomDadJoke();
@@ -11,6 +15,7 @@ test("obtener un chiste aleatorio", async () => {
 
 // 2. mockear la función del chiste
 test("obtener un chiste mockeado", async () => {
+  const original = helperFunctions.getRandomDadJoke;
   helperFunctions.getRandomDadJoke = jest.fn().mockImplementation(() =>
     Promise.resolve({
       status: 400,
@@ -25,6 +30,7 @@ test("obtener un chiste mockeado", async () => {
   );
   expect(helperFunctions.getRandomDadJoke).toHaveBeenCalledTimes(1);
   expect(helperFunctions.getRandomDadJoke).toHaveBeenCalledWith();
+  helperFunctions.getRandomDadJoke = original;
 });
 
 // 3. mockear un módulo
@@ -35,7 +41,6 @@ test("crear un usuario", () => {
 });
 
 // 4. espiar a un módulo, por ejemplo fetch
-
 test("espiar y mockear fetch", async () => {
   const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
     Promise.resolve({

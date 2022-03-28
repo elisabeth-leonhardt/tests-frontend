@@ -2,11 +2,11 @@
 
 exports[`validar el componente navbar renderiza correctamente sin usuario 1`] = `
 <div>
-  <nav
+  <aside
     class="bg-dark-background"
   >
     <div
-      class="max-w-6xl p-4 mx-auto text-white flex justify-between items-center border-1 border-rose-500"
+      class="max-w-6xl p-2 mx-auto text-white flex justify-between items-center border-1 border-rose-500"
     >
       <img
         alt="bitlogic logo"
@@ -41,6 +41,6 @@ exports[`validar el componente navbar renderiza correctamente sin usuario 1`] = 
         Login
       </button>
     </div>
-  </nav>
+  </aside>
 </div>
 `;

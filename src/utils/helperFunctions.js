@@ -53,7 +53,6 @@ export const helperFunctions = {
       },
     });
     const joke = await response.json();
-    console.log(joke);
     return joke;
   },
 
