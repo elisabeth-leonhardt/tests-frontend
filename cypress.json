@@ -1,1 +1,3 @@
-{}
+{
+  "ignoreTestFiles": "**/integration/2-advanced-examples/*spec.js"
+}

@@ -61,7 +61,10 @@ function MemeAdminCard({ meme }) {
   }
 
   return (
-    <div className='shadow-md shadow-dark-background rounded relative p-4 flex gap-4'>
+    <div
+      className='shadow-md shadow-dark-background rounded relative p-4 flex gap-4'
+      data-testid='meme-admin-card'
+    >
       <img src={meme.image} alt={meme.title} className='max-h-[15rem]' />
       <div className=' flex flex-col gap-4 items-start'>
         <p>Título: {meme?.title}</p>
@@ -95,6 +98,7 @@ function MemeAdminCard({ meme }) {
           <button
             onClick={() => mutateDelete(meme.id)}
             className='flex gap-2 py-2 px-4 bg-red-600 rounded text-white hover:bg-red-800'
+            data-testid='delete-meme'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -115,6 +119,7 @@ function MemeAdminCard({ meme }) {
           <button
             onClick={() => setModalState(true)}
             className='py-2 px-4 flex gap-2 bg-blue-600 rounded text-white hover:bg-blue-800'
+            data-testid='edit-meme'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'

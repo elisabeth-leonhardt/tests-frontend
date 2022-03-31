@@ -29,7 +29,7 @@ function App() {
       <CookiesProvider>
         <BrowserRouter>
           <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             <Navbar user={user} setUser={setUser}></Navbar>
             <Routes>
               <Route

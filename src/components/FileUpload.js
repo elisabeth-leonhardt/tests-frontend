@@ -107,6 +107,7 @@ function FileUpload({ user }) {
             placeholder='el mejor meme'
             onChange={onFormChange}
             value={formState.memeTitle}
+            data-testid='meme-title-input'
           />
         </label>
         <label htmlFor='memeTitle' className='flex items-center'>
@@ -129,6 +130,7 @@ function FileUpload({ user }) {
           type='submit'
           className='bg-bitlogic-blue px-4 py-2 rounded text-white disabled:bg-gray-500'
           disabled={!selectedFile}
+          data-testid='meme-submit'
         >
           Subir Meme
         </button>

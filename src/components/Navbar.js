@@ -18,7 +18,11 @@ function Navbar({ user, setUser }) {
       <div className='max-w-6xl p-2 mx-auto text-white flex justify-between items-center border-1 border-rose-500'>
         <img src='BITMEMES.png' alt='bitlogic logo' className='w-40' />
         <div className='flex gap-6'>
-          <Link to='/' className='flex gap-2 hover:text-bitlogic-blue'>
+          <Link
+            to='/'
+            className='flex gap-2 hover:text-bitlogic-blue'
+            data-testid='home-link'
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6'
@@ -62,11 +66,17 @@ function Navbar({ user, setUser }) {
           <button
             className='text-bitlogic-yellow'
             onClick={() => setModalState(true)}
+            data-testid='username-button'
           >
             {user}
           </button>
         ) : (
-          <button onClick={() => setModalState(true)}>Login</button>
+          <button
+            onClick={() => setModalState(true)}
+            data-testid='login-button'
+          >
+            Login
+          </button>
         )}
       </div>
       {modalState && (
@@ -91,6 +101,7 @@ function Navbar({ user, setUser }) {
                       className='border-[1px] ml-4'
                       value={userInput}
                       onChange={(e) => setUserInput(e.target.value)}
+                      data-testid='username-input'
                     />
                   </label>
                 </div>
@@ -107,6 +118,7 @@ function Navbar({ user, setUser }) {
                     className='bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                     type='button'
                     onClick={handleModalClose}
+                    data-testid='username-save'
                   >
                     Save Changes
                   </button>

@@ -61,19 +61,26 @@ export const helperFunctions = {
   getTheAnswerToTheUltimateQuestionOfLife: async function (
     supercomputer = "deep thought"
   ) {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    return {
-      answerToTheUltimateQuestionOfLife: 42,
-      Universe: 42,
-      everything: 42,
-      reportedDate: new Date(),
-      calculatedBy: supercomputer,
-    };
+    const myPromise = new Promise(function (resolve, reject) {
+      setTimeout(
+        () =>
+          resolve({
+            answerToTheUltimateQuestionOfLife: 42,
+            Universe: 42,
+            everything: 42,
+            reportedDate: new Date(),
+            calculatedBy: supercomputer,
+          }),
+        3000
+      );
+    });
+    return myPromise;
   },
 
-  getRelatedArticles: async function (id) {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    // very complicated and long calculation going on here
-    return ["uid-23", "uid-234", "uid-890"];
+  getRelatedArticles: function (id) {
+    const myPromise = new Promise(function (resolve, reject) {
+      setTimeout(() => resolve(["uid-23", "uid-234", "uid-890"]), 3000);
+    });
+    return myPromise;
   },
 };

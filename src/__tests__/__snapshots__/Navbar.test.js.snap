@@ -37,7 +37,9 @@ exports[`validar el componente navbar renderiza correctamente sin usuario 1`] = 
           Home
         </a>
       </div>
-      <button>
+      <button
+        data-testid="login-button"
+      >
         Login
       </button>
     </div>

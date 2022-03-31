@@ -24,7 +24,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "cypress:percy": "percy exec -- cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +46,11 @@
     ]
   },
   "devDependencies": {
+    "@percy/cli": "^1.0.0-beta.76",
+    "@percy/cypress": "^3.1.1",
     "autoprefixer": "^10.4.2",
     "cypress": "^9.5.2",
+    "cypress-file-upload": "^5.0.8",
     "jest": "^27.5.1",
     "msw": "^0.39.2",
     "postcss": "^8.4.7",
