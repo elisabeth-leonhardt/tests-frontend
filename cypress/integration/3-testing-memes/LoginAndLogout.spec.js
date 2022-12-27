@@ -2,6 +2,10 @@ beforeEach(() => {
   cy.viewport(1440, 1440);
 });
 
+beforeAll(() => {
+  console.log("hola");
+});
+
 it("test del flujo de login", () => {
   cy.visit("localhost:3000");
   cy.get('[data-testid="login-button"]').click();

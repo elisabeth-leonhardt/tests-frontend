@@ -93,7 +93,7 @@ it("eliminar un meme", () => {
   cy.get("[data-testid=meme-admin-card]").should("have.length", 2);
 });
 
-it.only("subir un nuevo meme", () => {
+it("subir un nuevo meme", () => {
   const filePath = "/images/testMeme.jpeg";
   cy.visit("localhost:3000/mis-memes");
   cy.get('input[type="file"]').attachFile(filePath);

@@ -16,7 +16,7 @@ export function MemeCard({ meme, handleLike }) {
   const daysAgo = differenceInDays(new Date(), new Date(meme.date));
   return (
     <div
-      className='shadow-md shadow-dark-background rounded relative'
+      className='shadow-md shadow-dark-background rounded relative pb-8'
       data-testid='meme-card'
     >
       {daysAgo === 0 && (

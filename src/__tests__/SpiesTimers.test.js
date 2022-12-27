@@ -5,7 +5,7 @@ import { helperFunctions } from "../utils/helperFunctions";
 // mockear la fecha de hoy:
 beforeAll(() => {
   jest.useFakeTimers("modern");
-  jest.setSystemTime(new Date("2022-01-05T12:00:00Z")); //hoy es 5.1. del 2022 12 del mediodia
+  // jest.setSystemTime(new Date("2022-01-05T12:00:00Z")); //hoy es 5.1. del 2022 12 del mediodia
 });
 
 test("espiar y mockear fetch", async () => {
@@ -59,7 +59,7 @@ test("Obtener respuesta a la última pregunta de la vida", async () => {
   });
 });
 
-test("testear y adelantar un timer con promesas", () => {
+test.only("testear y adelantar un timer con promesas", () => {
   // si usan real timers, no pueden adelantarlos y el test se demora 3 segundos
   // jest.useRealTimers();
   const values = helperFunctions.getRelatedArticles(123);
